@@ -1,24 +1,23 @@
-import { exec, installDeps, isExist, isYarn, packageJson, writePackageJson } from "../utils"
+import { exec, isExist, isYarn, packageJson, pushDeps, writePackageJson } from "../utils"
 
 export const addCommit = () => {
-  const devDependencies = [`commitizen`, `cz-conventional-changelog`]
-  const dependencies = []
+  pushDeps(undefined, `commitizen`,)
 
-  installDeps(dependencies, devDependencies)
+  // const pathName = packageJson?.config?.commitizen?.path
+  // if (!pathName || !isExist(pathName)) {
+  //   exec(`npx commitizen init cz-conventional-changelog ${isYarn ? '--yarn --dev --exact' : '--save-dev --save-exact'}`)
+  // }
 
-  if (!isExist(packageJson?.config?.commitizen?.path)) {
-    exec(`npx commitizen init cz-conventional-changelog ${isYarn ? '--yarn --dev --exact' : '--save-dev --save-exact'}`)
-  }
-  
   // exec(`npx commitizen init cz-conventional-changelog --yarn --dev --exact`)
   writePackageJson({
-    config: {
-      "commitizen": {
-        "path": "cz-conventional-changelog"
-      }
-    },
+    // config: {
+    //   "commitizen": {
+    //     "path": "cz-conventional-changelog"
+    //   }
+    // },
     scripts: {
-      commit: "cz",
+      cz: "cz",
     }
   })
+  
 }

@@ -4,7 +4,8 @@ export enum ChoiceEnum {
   eslint = `eslint`,
   editorConfig = `editorConfig`,
   ts = `ts`,
-  commit = `commit`
+  commit = `commit`,
+  release = `release`
 }
 
 const choiceList = [
@@ -12,6 +13,7 @@ const choiceList = [
   ChoiceEnum.editorConfig,
   ChoiceEnum.ts,
   ChoiceEnum.commit,
+  ChoiceEnum.release
 ].map(v => getChoice(v))
 
 export const selectListOption = {

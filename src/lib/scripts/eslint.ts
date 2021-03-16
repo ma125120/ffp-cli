@@ -1,5 +1,5 @@
 
-import { extendConfig, getPath, installDeps, isExist, loadYml, pushSafe, writeFile } from "../utils"
+import { extendConfig, getPath, isExist, isExistTs, loadYml, pushDeps, pushSafe, writeFile } from "../utils"
 import { eslintConfigTmpl, eslintRules } from "../template/eslint"
 import { editorConfigTmpl } from "../template/editorConfig"
 
@@ -31,7 +31,7 @@ export const addEslint = (hasEditorConfig: boolean, hasTs: boolean,) => {
     filename = eslintFiles[0];
     config = eslintConfigTmpl
   }
-  if (hasEditorConfig) {
+  if (hasEditorConfig && !isExist(`.editorconfig`)) {
     writeFile(`.editorconfig`, editorConfigTmpl)
   }
 
@@ -40,7 +40,7 @@ export const addEslint = (hasEditorConfig: boolean, hasTs: boolean,) => {
   if (/\.ya?ml$/g.test(filename)) {
     writeFile(filename, config)
   } else {
-    writeFile(filename, (/\.json$/g.test(filename) ? '' : `module.exports = `) + JSON.stringify(config, null, '\t'))
+    writeFile(filename, (/\.json$/g.test(filename) ? '' : `module.exports = `) + JSON.stringify(config, null, '  '))
   }
 }
 
@@ -50,21 +50,18 @@ function replaceEslint(config, hasEditorConfig: boolean, hasTs: boolean,) {
   config.extends = config.extends || []
   pushSafe(config.extends, `eslint:recommended`)
 
-  const devDependencies = [`eslint`]
-  const dependencies = []
+  pushDeps(undefined, 'eslint')
 
   if (hasEditorConfig) {
     replaceRule(config)
   }
-  if (hasTs) {
+  if (isExistTs()) {
     config.parser = '@typescript-eslint/parser'
     pushSafe(config.plugins, `@typescript-eslint`)
     pushSafe(config.extends, `plugin:@typescript-eslint/recommended`)
 
-    devDependencies.push(`@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`, `typescript`)
+    pushDeps(undefined, `@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`, `typescript`)
   }
-
-  installDeps(dependencies, devDependencies)
 }
 
 function replaceRule(config) {

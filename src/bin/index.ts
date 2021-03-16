@@ -4,7 +4,9 @@ import commander from 'commander';
 import prompts from 'prompts';
 import { addCommit } from '../lib/scripts/commit';
 import { addEslint } from '../lib/scripts/eslint';
+import { addRelease } from '../lib/scripts/release';
 import { selectListOption, ChoiceEnum } from '../lib/selects'
+import { installDeps, logFn } from '../lib/utils';
 
 interface Command extends commander.Command {
   dep: ChoiceEnum[];
@@ -30,13 +32,19 @@ async function start() {
   const hasTs = dep.includes(ChoiceEnum.ts)
   const hasEslint = dep.includes(ChoiceEnum.eslint)
   const hasCommit = dep.includes(ChoiceEnum.commit)
+  const hasRelease = dep.includes(ChoiceEnum.release)
 
   if (hasEslint) {
-    addEslint(hasEditorConfig, hasTs)
+    logFn(() => addEslint(hasEditorConfig, hasTs), `eslint`)
   }
   if (hasCommit) {
-    addCommit()
+    logFn(() => addCommit(), `commit`)
   }
+  if (hasRelease) {
+    logFn(() => addRelease(), `release`)
+  }
+
+  installDeps()
 }
 
 start()
