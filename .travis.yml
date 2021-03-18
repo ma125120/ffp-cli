@@ -3,7 +3,7 @@ node_js:
   - 14
 
 env:
-  - TEST=1 BUILD_NAME=bd
+  - BUILD_NAME=bd
 
 install:
   - npm install
@@ -29,14 +29,12 @@ jobs:
   include:
     - stage: test
       script: npm run test
-      if: TEST = 1
     - stage: build
       <<: *bd
     - stage: publish
-      <<: *bd
+      script: npm run $BUILD_NAME
       deploy:
         provider: npm
         api_key: $NPM_API_KEY
         on:
-          tags: true
           branch: main
