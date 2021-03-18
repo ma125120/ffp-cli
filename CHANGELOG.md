@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.4 (2021-03-18)
+
+
+### Features
+
+* add release ([5b0692b](https://github.com/ma125120/ffp-cli/commit/5b0692b9eaad74181251270ea8ac91c3dda2457f))
+* jest travis[no-ci] ([a87646a](https://github.com/ma125120/ffp-cli/commit/a87646aba7d76fe401b0be915030c91fd5901f4a))
+
+
+### Bug Fixes
+
+* 修正travis ([92ec498](https://github.com/ma125120/ffp-cli/commit/92ec498de8efb0e17eff9b512a011b1f19f294a5))
+
 ### 0.1.3 (2021-03-18)
 
 
