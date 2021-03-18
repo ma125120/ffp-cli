@@ -1,0 +1,42 @@
+language: node_js
+node_js:
+  - 14
+
+env:
+  - TEST=1 BUILD_NAME=bd
+
+install:
+  - npm install
+
+branches:
+  only:
+    - main
+    - /^ci-.*$/
+
+stages:
+  - test
+  - build
+  - name: publish
+    if: branch = main
+
+_shared_build: &bd
+  script: npm run $BUILD_NAME
+  if: env(BUILD_NAME) =~ /^\w/
+
+jobs:
+  exclude:
+    - if: branch = dev OR commit_message =~ /(no-ci)/
+  include:
+    - stage: test
+      script: npm run test
+      if: TEST = 1
+    - stage: build
+      <<: *bd
+    - stage: publish
+      <<: *bd
+      deploy:
+        provider: npm
+        api_key: $NPM_API_KEY
+        on:
+          tags: true
+          branch: main

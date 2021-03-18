@@ -1,20 +1,57 @@
-const getChoice = (title) => ({ title, value: title, })
+// const getChoice = (title) => ({ title, value: title })
 
 export enum ChoiceEnum {
   eslint = `eslint`,
   editorConfig = `editorConfig`,
   ts = `ts`,
   commit = `commit`,
-  release = `release`
+  release = `release`,
+  jest = `jest`,
+  travis = `travis`,
 }
 
-const choiceList = [
-  ChoiceEnum.eslint,
-  ChoiceEnum.editorConfig,
-  ChoiceEnum.ts,
-  ChoiceEnum.commit,
-  ChoiceEnum.release
-].map(v => getChoice(v))
+export const choiceList = [
+  {
+    value: ChoiceEnum.eslint,
+    desc: `代码校验`,
+    links: [`https://eslint.org/docs/user-guide/configuring/`]
+  },
+  {
+    value: ChoiceEnum.editorConfig,
+    desc: `编辑器格式化`,
+  },
+  {
+    value: ChoiceEnum.ts,
+    desc: `不解释`,
+  },
+  {
+    value: ChoiceEnum.commit,
+    desc: `规范代码提交格式`,
+    links: [
+      `https://github.com/conventional-changelog/commitlint`,
+      `https://typicode.github.io/husky/#/?id=automatic-recommended`,
+      `https://github.com/okonet/lint-staged#example-ignore-files-from-match`
+    ]
+  },
+  {
+    value:ChoiceEnum.release,
+    desc: `规范自动化发布`,
+    links: [`https://github.com/conventional-changelog/standard-version`]
+  },
+  {
+    value: ChoiceEnum.jest,
+    desc: `单元测试`,
+    links: [`https://jestjs.io/zh-Hans/docs/getting-started](https://jestjs.io/zh-Hans/docs/getting-started`]
+  },
+  {
+    value: ChoiceEnum.travis,
+    desc: `自动化CI/CD`,
+    links: [`https://docs.travis-ci.com/user/tutorial/`]
+  },
+].map(v => ({
+  ...v,
+  title: (v as { title?: string }).title || `${v.value}  ${v.desc}`
+}))
 
 export const selectListOption = {
   type: 'multiselect',

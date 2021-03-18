@@ -1,23 +1,32 @@
-import { exec, isExist, isYarn, packageJson, pushDeps, writePackageJson } from "../utils"
+import chalk from "chalk"
+import { exec, isExist, pushDeps, writePackageJson } from "../utils"
 
-export const addCommit = () => {
-  pushDeps(undefined, `commitizen`,)
+export const addCommit = async () => {
+  pushDeps(undefined, `commitizen`, `@commitlint/config-conventional`, `@commitlint/cli`, `husky`, `lint-staged`)
 
-  // const pathName = packageJson?.config?.commitizen?.path
-  // if (!pathName || !isExist(pathName)) {
-  //   exec(`npx commitizen init cz-conventional-changelog ${isYarn ? '--yarn --dev --exact' : '--save-dev --save-exact'}`)
-  // }
+  await exec(`npx husky init`)
+  if (isExist(`.husky/commit-msg`)) {
+    console.log(chalk.bgGrey(`有关 commit-msg 已存在，如有必要请需自行修改`))
+  } else {
+    exec(`npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"`)
+  }
 
-  // exec(`npx commitizen init cz-conventional-changelog --yarn --dev --exact`)
+  if (isExist(`.husky/pre-commit`)) {
+    console.log(chalk.bgGrey(`有关 pre-commit 已存在，如有必要请需自行修改`))
+  } else {
+    exec(`npx husky add .husky/pre-commit "npx --no-install lint-staged"`)
+  }
+
   writePackageJson({
-    // config: {
-    //   "commitizen": {
-    //     "path": "cz-conventional-changelog"
-    //   }
-    // },
+    "lint-staged": {
+      "*.[jt]sx?": "eslint --fix"
+    },
     scripts: {
       cz: "cz",
+    },
+    commitlint: {
+      extends: ['@commitlint/config-conventional']
     }
   })
-  
+
 }

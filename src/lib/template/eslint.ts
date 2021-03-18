@@ -45,5 +45,7 @@ export const eslintRules = {
   /** 强制在块之前使用一致的空格 */
   "space-before-blocks": "error",
   /** 强制在逗号周围使用空格 */
-  "comma-spacing": ["error"]
+  "comma-spacing": ["error"],
+  "@typescript-eslint/explicit-module-boundary-types": 0,
+  "@typescript-eslint/no-var-requires": 0,
 }

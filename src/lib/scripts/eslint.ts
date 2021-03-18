@@ -1,5 +1,5 @@
 
-import { extendConfig, getPath, isExist, isExistTs, loadYml, pushDeps, pushSafe, writeFile } from "../utils"
+import { extendConfig, getPath, isExist, isExistTs, loadYml, pushDeps, pushSafe, writeFile, writeFileSafe } from "../utils"
 import { eslintConfigTmpl, eslintRules } from "../template/eslint"
 import { editorConfigTmpl } from "../template/editorConfig"
 
@@ -8,10 +8,10 @@ const eslintFiles = [
   `.eslintrc.cjs`,
   `.eslintrc.yaml`,
   `.eslintrc.yml`,
-  `.eslintrc.json`,
+  `.eslintrc.json`
 ]
 
-export const addEslint = (hasEditorConfig: boolean, hasTs: boolean,) => {
+export const addEslint = (hasEditorConfig: boolean) => {
   let filename = '';
   let config;
 
@@ -31,11 +31,8 @@ export const addEslint = (hasEditorConfig: boolean, hasTs: boolean,) => {
     filename = eslintFiles[0];
     config = eslintConfigTmpl
   }
-  if (hasEditorConfig && !isExist(`.editorconfig`)) {
-    writeFile(`.editorconfig`, editorConfigTmpl)
-  }
 
-  replaceEslint(config, hasEditorConfig, hasTs)
+  replaceEslint(config, hasEditorConfig)
 
   if (/\.ya?ml$/g.test(filename)) {
     writeFile(filename, config)
@@ -44,7 +41,7 @@ export const addEslint = (hasEditorConfig: boolean, hasTs: boolean,) => {
   }
 }
 
-function replaceEslint(config, hasEditorConfig: boolean, hasTs: boolean,) {
+function replaceEslint(config, hasEditorConfig: boolean) {
   extendConfig(config, eslintConfigTmpl)
   config.plugins = config.plugins || []
   config.extends = config.extends || []
@@ -60,7 +57,7 @@ function replaceEslint(config, hasEditorConfig: boolean, hasTs: boolean,) {
     pushSafe(config.plugins, `@typescript-eslint`)
     pushSafe(config.extends, `plugin:@typescript-eslint/recommended`)
 
-    pushDeps(undefined, `@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`, `typescript`)
+    pushDeps(undefined, `@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`)
   }
 }
 
@@ -73,4 +70,27 @@ function replaceRule(config) {
   })
 
   // config.rules.quotes = config.rules.quotes || [2, 'single', { avoidEscape: true, allowTemplateLiterals: true }]
+}
+
+export const addTs = () => {
+  pushDeps(undefined, `@types/node`, `typescript`)
+
+  writeFileSafe(`tsconfig.json`, `{
+    "compilerOptions": {
+      "outDir": "./",
+      "target": "ES6",
+      "module": "CommonJS",
+      "allowJs": false,
+      "esModuleInterop": true,
+      "isolatedModules": false,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+    },
+    "include": ["src"],
+    "exclude": ["__test__"]
+  }`)
+}
+
+export const addEditorConfig = () => {
+  writeFileSafe(`.editorconfig`, editorConfigTmpl)
 }
