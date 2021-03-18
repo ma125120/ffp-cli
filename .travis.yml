@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 14
+  - 12
 
 env:
   - BUILD_NAME=bd
@@ -15,7 +15,6 @@ branches:
 
 stages:
   - test
-  - build
   - name: publish
     if: branch = main
 
@@ -29,12 +28,12 @@ jobs:
   include:
     - stage: test
       script: npm run test
-    - stage: build
-      <<: *bd
     - stage: publish
       script: npm run $BUILD_NAME
       deploy:
         provider: npm
         api_key: $NPM_API_KEY
+        email: 1418205177@qq.com
         on:
           branch: main
+          condition: commit_message =~ /release/
