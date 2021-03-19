@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/ma125120/ffp-cli/compare/v0.1.7...v0.2.1) (2021-03-19)
+
+
+### Bug Fixes
+
+* eslint 和 ts 相关问题及travis优化[no-ci] ([7674ea2](https://github.com/ma125120/ffp-cli/commit/7674ea20c2117b68b0c84463cbfe31436ff16e73))
+
 ### 0.1.7 (2021-03-19)
 
 
