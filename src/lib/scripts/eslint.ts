@@ -3,6 +3,7 @@ import { extendConfig, getPath, isExist, isExistTs, loadYml, pushDeps, pushSafe,
 import { eslintConfigTmpl, eslintRules } from "../template/eslint"
 import { editorConfigTmpl } from "../template/editorConfig"
 
+const editorconfigName = `.editorconfig`
 const eslintFiles = [
   `.eslintrc.js`,
   `.eslintrc.cjs`,
@@ -49,7 +50,7 @@ function replaceEslint(config, hasEditorConfig: boolean) {
 
   pushDeps(undefined, 'eslint')
 
-  if (hasEditorConfig) {
+  if (hasEditorConfig || isExist(editorconfigName)) {
     replaceRule(config)
   }
   if (isExistTs()) {
@@ -92,5 +93,5 @@ export const addTs = () => {
 }
 
 export const addEditorConfig = () => {
-  writeFileSafe(`.editorconfig`, editorConfigTmpl)
+  writeFileSafe(editorconfigName, editorConfigTmpl)
 }

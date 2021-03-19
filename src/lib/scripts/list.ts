@@ -9,4 +9,11 @@ export const showList = () => {
       + (v.links?.length ? v.links?.map(link => chalk.blue(link)).join(`\n`) + `\n` : '')
     )
   })
+
+  console.log(
+    chalk.white(`徽章制作网站`)
+    + `\n`
+    + chalk.blue(`https://www.shields.io/category/version`)
+    + `\n`
+  )
 }

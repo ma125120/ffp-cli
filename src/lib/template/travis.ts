@@ -43,4 +43,3 @@ jobs:
         api_key: $NPM_API_KEY
         on: master` : ''}`
 }
-// ab602ce10cb1be0f61d159286ca7484ec612ce9a

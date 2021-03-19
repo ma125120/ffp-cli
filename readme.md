@@ -1,9 +1,9 @@
 # ffp-cli
 全称front-full-project cli
 
-<a href="https://github.com/ma125120/ffp-cli">
+<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/ma125120/ffp-cli?style=social"><a href="https://github.com/ma125120/ffp-cli">
   <img src="https://www.travis-ci.com/ma125120/ffp-cli.svg?branch=main&status=passed" alt="build:passed">
-</a>
+</a> <img alt="npm" src="https://img.shields.io/npm/v/ffp-cli" /> <img alt="NPM" src="https://img.shields.io/npm/l/ffp-cli" /> <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/ma125120/ffp-cli"> <img alt="npm" src="https://img.shields.io/npm/dw/ffp-cli">
 
 
 提供一套完整的前端项目 脚手架 支持，通过选择对应配置直接集成，免去安装依赖再配置的麻烦。
