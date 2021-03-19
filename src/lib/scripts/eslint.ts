@@ -46,6 +46,7 @@ function replaceEslint(config, hasEditorConfig: boolean) {
   extendConfig(config, eslintConfigTmpl)
   config.plugins = config.plugins || []
   config.extends = config.extends || []
+  const eslintRec = `eslint:recommended`
   pushSafe(config.extends, `eslint:recommended`)
 
   pushDeps(undefined, 'eslint')
@@ -57,6 +58,9 @@ function replaceEslint(config, hasEditorConfig: boolean) {
     config.parser = '@typescript-eslint/parser'
     pushSafe(config.plugins, `@typescript-eslint`)
     pushSafe(config.extends, `plugin:@typescript-eslint/recommended`)
+    if (config.extends.includes(eslintRec)) {
+      config.extends.splice(config.extends.indexOf(eslintRec), 1)
+    }
 
     pushDeps(undefined, `@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`)
   }
