@@ -1,6 +1,6 @@
 {
   "name": "ffp-cli",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "前端工程化的工具支持",
   "main": "index.js",
   "bin": {
