@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.2 (2021-03-20)
+
+
+### Features
+
+* add release ([5b0692b](https://github.com/ma125120/ffp-cli/commit/5b0692b9eaad74181251270ea8ac91c3dda2457f))
+* jest travis[no-ci] ([a87646a](https://github.com/ma125120/ffp-cli/commit/a87646aba7d76fe401b0be915030c91fd5901f4a))
+
+
+### Bug Fixes
+
+* -l 时不需要package.json ([6f8aaa0](https://github.com/ma125120/ffp-cli/commit/6f8aaa08922b2bf959e24ccfba1f354579ea73a4))
+* eslint 和 ts 相关问题及travis优化[no-ci] ([7674ea2](https://github.com/ma125120/ffp-cli/commit/7674ea20c2117b68b0c84463cbfe31436ff16e73))
+* release & 徽章[no-ci] ([a6f4b20](https://github.com/ma125120/ffp-cli/commit/a6f4b20a114b4ff52a67caa30cc7728759c4dc46))
+
 ### [0.2.1](https://github.com/ma125120/ffp-cli/compare/v0.1.7...v0.2.1) (2021-03-19)
 
 
