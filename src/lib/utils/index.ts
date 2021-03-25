@@ -89,7 +89,7 @@ export const pushSafe = (list = [], item) => {
     list.push(item)
   }
 }
-export const getPackageJson = () => require(getPath(`package.json`))
+export const getPackageJson = () => isExist(getPath(`package.json`)) ? require(getPath(`package.json`)) : {};
 
 export const writePackageJson = (obj) => {
   const json = getPackageJson()
