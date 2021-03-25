@@ -1,6 +1,6 @@
 {
   "name": "ffp-cli",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "前端工程化的工具支持",
   "main": "index.js",
   "bin": {
@@ -30,6 +30,7 @@
   "author": "马鹏达",
   "license": "MIT",
   "dependencies": {
+    "cjs2esmodule": "^1.1.1",
     "commander": "^7.1.0",
     "js-yaml": "^4.0.0",
     "prompts": "^2.4.0"
